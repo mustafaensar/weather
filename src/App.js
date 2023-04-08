@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { usePosition } from 'use-position';
 import axios from 'axios';
+import Weather from './components/Weather';
 
 function App() {
   
+  const {latitude,longitude} = usePosition();
   const [weather, setWeather] = React.useState();
   const [unit, setUnit] = React.useState("metric");
-  const {latitude,longitude} = usePosition();
   console.log(latitude,longitude);
   
   useEffect(() => {
@@ -39,16 +40,13 @@ function App() {
   }
 
   return (
-    <>
-      <div className="App">
-        <h3>{weather.name}</h3>
-        <h3>
-          {unit === "metric" ? `${Math.ceil(weather.main.temp)} °C ` : `${Math.ceil(weather.main.temp * 1.8 + 32)} °F `}
-          <button onClick={handleUnit}>Unit F°/C°</button>
-        </h3>
-        <h3>{weather.weather.map(data => data.description)}</h3>
-      </div>
-    </>
+    <div className="App">
+      {weather? 
+        <Weather weather={weather} unit={unit} handleUnit={handleUnit}/>    
+        :
+        ""
+      }
+    </div>
   );
 }
 
