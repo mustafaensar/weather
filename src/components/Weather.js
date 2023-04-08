@@ -3,6 +3,7 @@ import React from 'react'
 export default function Weather(props) {
   return (
     <>
+      <h3>BABA NASILSIN</h3>
       <h3>{props.weather.name}</h3>
         <h3>
           {props.unit === "metric" ? `${Math.ceil(props.weather.main.temp)} °C ` : `${Math.ceil(props.weather.main.temp * 1.8 + 32)} °F `}
